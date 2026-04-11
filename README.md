@@ -91,7 +91,7 @@ npm install
 Create a `.env` file in the project root:
 
 ```env
-VITE_TMDB_API_KEY=your_tmdb_api_key_here
+VITE_TMDB_API_KEY=966741e6a93b974626716efc718d939e
 VITE_TMDB_IMAGE_BASE=https://image.tmdb.org/t/p
 ```
 
