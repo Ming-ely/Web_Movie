@@ -17,9 +17,10 @@ const Home = () => {
   }, [trending]);
 
   return (
-    <div className="relative pb-16">
-      <BannerAmbient movie={featuredMovie} isTrailerPlaying={false} />
+  <div className="relative bg-black text-white">
+    <BannerAmbient movie={featuredMovie} isTrailerPlaying={false} />
 
+    <div className="relative z-10">
       {trendingLoading ? (
         <SkeletonBanner />
       ) : (
@@ -29,7 +30,8 @@ const Home = () => {
         />
       )}
 
-      <div className="relative z-10 -mt-16">
+      {/* Movie rows */}
+      <div className="mt-[-100px] space-y-8 px-4 md:px-12">
         {rows.map((row) => (
           <MovieRow
             key={row.title}
@@ -41,15 +43,16 @@ const Home = () => {
           />
         ))}
       </div>
-
-      {selectedMovie && (
-        <MovieModal
-          movie={selectedMovie}
-          onClose={() => setSelectedMovie(null)}
-        />
-      )}
     </div>
-  );
+
+    {selectedMovie && (
+      <MovieModal
+        movie={selectedMovie}
+        onClose={() => setSelectedMovie(null)}
+      />
+    )}
+  </div>
+);
 };
 
 export default Home;

@@ -4,14 +4,16 @@ import { useScrolled } from '@/hooks/useScrolled';
 import { NetflixIcon, SearchIcon, BellIcon, ArrowDownIcon } from '@/icons';
 import { auth } from '@/firebase';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const scrolled = useScrolled();
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-
+const isActive = (path) => location.pathname === path;
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -29,16 +31,70 @@ const Navbar = () => {
     >
       {/* Left */}
       <div className="flex items-center gap-6">
-        <Link to="/" className="flex-shrink-0">
-          <NetflixIcon />
-        </Link>
-        <ul className="hidden md:flex items-center gap-5">
-          <li><Link to="/" className="text-sm text-white hover:text-gray-300 transition-colors">Home</Link></li>
-          <li><Link to="/search" className="text-sm text-gray-300 hover:text-white transition-colors">TV Shows</Link></li>
-          <li><Link to="/search" className="text-sm text-gray-300 hover:text-white transition-colors">Movies</Link></li>
-          <li><Link to="/search" className="text-sm text-gray-300 hover:text-white transition-colors">New & Popular</Link></li>
-        </ul>
-      </div>
+  <Link to="/" className="flex-shrink-0">
+    <NetflixIcon />
+  </Link>
+
+  <ul className="hidden md:flex items-center gap-5">
+    
+    {/* Home */}
+    <li>
+      <Link
+        to="/"
+        className={`text-sm transition-colors ${
+          location.pathname === '/'
+            ? 'text-white font-semibold'
+            : 'text-gray-300 hover:text-white'
+        }`}
+      >
+        Home
+      </Link>
+    </li>
+
+    {/* TVShows */}
+    <li>
+      <Link
+        to="/tv"
+        className={`text-sm transition-colors ${
+          isActive('/tv')
+            ? 'text-white font-semibold'
+            : 'text-gray-300 hover:text-white'
+        }`}
+      >
+        TVShows
+      </Link>
+    </li>
+
+    {/* Movies */}
+    <li>
+      <Link
+        to="/movies"
+        className={`text-sm transition-colors ${
+          isActive('/movies')
+            ? 'text-white font-semibold'
+            : 'text-gray-300 hover:text-white'
+        }`}
+      >
+        Movies
+      </Link>
+    </li>
+
+    {/* New Popular */}
+    <li>
+      <Link
+        to="/new-popular"
+        className={`text-sm transition-colors ${
+          isActive('/new-popular')
+            ? 'text-white font-semibold'
+            : 'text-gray-300 hover:text-white'
+        }`}
+      >
+        NewPopular
+      </Link>
+    </li>
+
+  </ul>
+</div>
 
       {/* Right */}
       <div className="flex items-center gap-4">

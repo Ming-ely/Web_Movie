@@ -35,9 +35,12 @@ export const fetchMovieDetails = (movieId) =>
     params: { append_to_response: 'videos,credits,similar,images', include_image_language: 'en,null' },
   }).then(r => r.data);
 
-export const fetchTVDetails = (tvId) =>
-  tmdb.get(`/tv/${tvId}`, {
-    params: { append_to_response: 'videos,credits,similar,images', include_image_language: 'en,null' },
+export const fetchTVDetails = (id) =>
+  tmdb.get(`/tv/${id}`, {
+    params: {
+      append_to_response: 'videos,credits,similar,images',
+      include_image_language: 'en,null',
+    },
   }).then(r => r.data);
 
 export const searchMulti = (query) =>

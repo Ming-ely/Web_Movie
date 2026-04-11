@@ -95,6 +95,16 @@ const MovieModal = ({ movie, onClose }) => {
                   {rating && <span className="text-green-400 font-semibold">{rating} Match</span>}
                   {year && <span className="text-gray-400">{year}</span>}
                   {runtime && <span className="text-gray-400">{runtime}</span>}
+                   {/* 🔥 THÊM Ở ĐÂY */}
+  {details?.number_of_seasons && (<span className="text-gray-400">
+      {details.number_of_seasons} Seasons</span>
+  )}
+
+  {details?.number_of_episodes && (
+    <span className="text-gray-400">
+      {details.number_of_episodes} Episodes
+    </span>
+  )}
                   <span className="border border-gray-500 px-1.5 py-0.5 text-xs text-gray-400 rounded">HD</span>
                 </div>
                 <p className="text-gray-200 text-sm leading-relaxed">

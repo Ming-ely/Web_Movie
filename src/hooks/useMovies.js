@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import {
+import tmdb, {
   fetchTrending,
   fetchNetflixOriginals,
   fetchTopRated,
@@ -11,6 +11,8 @@ import {
   searchMulti,
   GENRES,
 } from '@/api/tmdb';
+
+/* ================= HOME ================= */
 
 export function useTrending() {
   return useQuery({
@@ -45,6 +47,8 @@ export function useGenreMovies(genreId) {
   });
 }
 
+/* ================= DETAILS ================= */
+
 export function useMovieDetails(movieId) {
   return useQuery({
     queryKey: ['movie', movieId],
@@ -60,6 +64,8 @@ export function useTVDetails(tvId) {
     enabled: !!tvId,
   });
 }
+
+/* ================= EXTRA ================= */
 
 export function useMovieImages(movieId) {
   return useQuery({
@@ -77,6 +83,8 @@ export function useMovieVideos(movieId) {
   });
 }
 
+/* ================= SEARCH ================= */
+
 export function useSearch(query) {
   return useQuery({
     queryKey: ['search', query],
@@ -85,6 +93,8 @@ export function useSearch(query) {
     staleTime: 1000 * 60 * 5,
   });
 }
+
+/* ================= HOME ROWS ================= */
 
 export function useHomeRows() {
   const trending = useTrending();
@@ -108,5 +118,33 @@ export function useHomeRows() {
       { title: 'Documentaries', data: documentary.data, isLoading: documentary.isLoading },
     ],
     isAnyLoading: trending.isLoading,
+  };
+}
+
+/* ================= MOVIE PAGE ================= */
+
+export function useMovieRows() {
+  const trending = useQuery({
+    queryKey: ['movies', 'trending-movie'],
+    queryFn: fetchTrending,
+  });
+
+  const popular = useQuery({
+    queryKey: ['movies', 'popular'],
+    queryFn: () =>
+      tmdb.get('/movie/popular').then((res) => res.data.results),
+  });
+
+  const topRated = useQuery({
+    queryKey: ['movies', 'top-rated-movie'],
+    queryFn: fetchTopRated,
+  });
+
+  return {
+    rows: [
+      { title: 'Trending Movies', data: trending.data, isLoading: trending.isLoading },
+      { title: 'Popular Movies', data: popular.data, isLoading: popular.isLoading, isLargeRow: true },
+      { title: 'Top Rated Movies', data: topRated.data, isLoading: topRated.isLoading },
+    ],
   };
 }

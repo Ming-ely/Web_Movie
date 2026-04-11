@@ -28,13 +28,7 @@ const MovieRow = ({ title, movies, isLoading, isLargeRow = false, onMovieClick }
 
   return (
     <div className="relative px-4 md:px-12 my-6 group">
-      <h2 className="text-lg md:text-xl font-bold text-white mb-2 hover:text-gray-300 cursor-pointer transition-colors inline-flex items-center gap-2">
-        {title}
-        <span className="text-sm text-netflix-red opacity-0 group-hover:opacity-100 transition-opacity">
-          Explore All ›
-        </span>
-      </h2>
-
+   {/* title removed - handled by parent */}
       <div className="relative">
         {showLeftArrow && (
           <button
@@ -48,7 +42,7 @@ const MovieRow = ({ title, movies, isLoading, isLargeRow = false, onMovieClick }
         <div
           ref={rowRef}
           onScroll={handleScroll}
-          className="flex gap-2 overflow-x-auto py-4 scroll-smooth"
+          className="flex gap-3 overflow-x-auto py-6 scroll-smooth snap-x snap-mandatory scrollbar-hide"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {movies.map((movie) => (
