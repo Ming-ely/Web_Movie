@@ -50,8 +50,8 @@ Website xem phim với giao diện, chức năng được bắt chước từ Ne
 ### Cài đặt
 
 ```Lệnh bash
-git clone https://github.com/mtohernandez/netflix-clone.git
-cd netflix-clone
+git clone https://github.com/Ming-ely/Web_Movie.git
+cd Web_Movie
 npm install
 ```
 
